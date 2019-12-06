@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="从视频开始目标  学习读取、显示以及保存视频  学习从摄像头上读取并显示视频  将学到cv2.VideoCapture(),cv2.VideoWriter()函数    从摄像头获取视频文件经常的，我们需要通过摄像头抓取实时的画面。OpenCV为此提供了简单的接口。让我们通过摄像头（我使用的是笔记本自带的摄像头）来采集画面吧。我将它转换成了灰度视频，让我们从这个简单的测试开始吧。 为了采集视频，你">
+<meta name="keywords" content="OpenCV-Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV-Python（二）：从处理视频开始">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;03&#x2F;22&#x2F;OpenCV-Python-Second&#x2F;index.html">
+<meta property="og:site_name" content="sworker">
+<meta property="og:description" content="从视频开始目标  学习读取、显示以及保存视频  学习从摄像头上读取并显示视频  将学到cv2.VideoCapture(),cv2.VideoWriter()函数    从摄像头获取视频文件经常的，我们需要通过摄像头抓取实时的画面。OpenCV为此提供了简单的接口。让我们通过摄像头（我使用的是笔记本自带的摄像头）来采集画面吧。我将它转换成了灰度视频，让我们从这个简单的测试开始吧。 为了采集视频，你">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-06T15:36:33.845Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/03/22/OpenCV-Python-Second/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>OpenCV-Python（二）：从处理视频开始 | sworker</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sworker</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/OpenCV-Python-Second/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sworker">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sworker">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenCV-Python（二）：从处理视频开始
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-22 08:12:00" itemprop="dateCreated datePublished" datetime="2018-03-22T08:12:00+08:00">2018-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-06 23:36:33" itemprop="dateModified" datetime="2019-12-06T23:36:33+08:00">2019-12-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%BF%BB%E8%AF%91/" itemprop="url" rel="index">
+                    <span itemprop="name">技术翻译</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="从视频开始"><a href="#从视频开始" class="headerlink" title="从视频开始"></a>从视频开始</h1><h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><blockquote>
+<ul>
+<li><p>学习读取、显示以及保存视频</p>
+</li>
+<li><p>学习从摄像头上读取并显示视频</p>
+</li>
+<li><p>将学到cv2.VideoCapture(),cv2.VideoWriter()函数</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="从摄像头获取视频文件"><a href="#从摄像头获取视频文件" class="headerlink" title="从摄像头获取视频文件"></a>从摄像头获取视频文件</h3><p>经常的，我们需要通过摄像头抓取实时的画面。OpenCV为此提供了简单的接口。让我们通过摄像头（我使用的是笔记本自带的摄像头）来采集画面吧。我将它转换成了灰度视频，让我们从这个简单的测试开始吧。</p>
+<p>为了采集视频，你需要先创建一个视屏采集(VideoCapture)对象。它的参数可以是摄像头的索引值或者摄像头的名字。如果通过索引值选择，记得索引值是从0开始的。最终，不要忘了释放资源（采集的工具）。</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">import numpy as np</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">import cv2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">cap &#x3D; cv2.VideoCapture(0)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">while(True):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">#一个画面一个画面的采集</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">ret, frame &#x3D; cap.read()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">#我们窗体上显示的画面来源</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">gray &#x3D; cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">#显示返回的画面</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">cv2.imshow(&#39;frame&#39;, gray)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">if cv2.waitKey(1) &amp; 0xFF &#x3D;&#x3D; ord(&#39;q&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">break</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">#当所有的完成后，释放资源</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">cap.release()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">cv2.destroyAllWindow()</span></pre></td></tr></table></figure>
+
+<p>cap.read()返回一个布尔值（True/False）。如果一个帧能够被正确的读取，这个函数将返回真。所以，你可以通过检查这个函数的返回值来检查视频的结尾。</p>
+<p>有的时候cap可能无法完成初始化。在这情况下，这段代码将返回错误。你可以通过cap.isOpened()这个函数来检查它是否被成功的初始化，如果返回值为真，则表示初始化成功，否则使用cap.open()。</p>
+<p>你可以通过cap.get(propId)这个方法来获取当前视频的相关信息，其中propId的值是从0到18的。其中有些值是可以通过cap.set(propId, value)这个函数进行修改的。</p>
+<p>比如说，我可以通过cap.get(3)和cap.get(4)这两个函数来获取当前帧的宽度和高度。在默认情况下，它将返回640*480。但如果我想修改成320*240，那么只需要用ret=cap.set(3,320)和ret=cap.set(4,240)就可以了。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果在使用过程当中出现了错误，请先确保这个摄像头在其余的摄像头驱动程序中能够正常工作（比如在Linux）操作系统上。</p>
+<h3 id="通过视频文件播放视频"><a href="#通过视频文件播放视频" class="headerlink" title="通过视频文件播放视频"></a>通过视频文件播放视频</h3><p>这个跟从摄像头获取文件是一样的，只需在创建视频对象的时候将索引号换成视频文件的名字就好了。当然，在播放视频文件的时候，在cv2.waitKey()中需要填入适当的时间。如果这个时间太短，视频将会播放的很快，如果这个时间太长，这个视频将会播放的很慢（这也就是你如何以慢速播放视频的方法）。在正常情况下，25毫秒是比较好的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">import numpy as np</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">import cv2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">cap &#x3D; cv2.VideoCapture(&#39;vtest.avi&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">while(cap.isOpened()):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">ret, frame &#x3D; cap.read()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">grap &#x3D; cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">cv2.imshow(&#39;frame&#39;, gray)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">if cv2.waitKey(1) &amp; 0xFF &#x3D;&#x3D; ord(&#39;q&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">break</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">cap.release()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">cv2.destroyAllWindows()</span></pre></td></tr></table></figure>
+
+<h3 id="保存视频"><a href="#保存视频" class="headerlink" title="保存视频"></a>保存视频</h3><p>我们想将一帧一帧采集的视频进行保存，对于保存图片来说这很简单，只需要使用cv2.imwrite()。如果想要保存视频，则需要多做几步。</p>
+<p>我们先创建一个VideoWriter的对象。我们需要设定好输出的文件名（例如：output.avi）。我们还需要指定FourCC编码（具体细节在下一章）。接着是设置每秒播放的帧数（fps），最后是颜色（Color）标记。如果返回值为真，编码器需要颜色类，否则以灰色的表示。</p>
+<p>ForCC指定视频编码方式以4字节为一位。相关信息可以在fourcc.org上查找。这个是由平台决定的。下列编码方式在我电脑上好使。</p>
+<blockquote>
+<ul>
+<li>在Fedora上：DIVX, XVID, MJPG, X264, WMV1, WMV2(XVID是较好的选择，MJPG会导致快速播放视频，X264提供很小的画面)</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>在windows上：DIVX（被最多的测试和添加）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>在OSX上：还不太清楚</li>
+</ul>
+</blockquote>
+<p>FourCC编码以cv2.VideoWriter_fourcc(‘M’, ‘J’, ‘P’, ‘G’)或者cv2.VideoWriter_fourcc(*‘MJPG’)的方式编写</p>
+<p>以下是从摄像头获取视频，翻转每个画面并保存的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">#coding:utf-8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">import numpy as np</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">import cv2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">cap &#x3D; cv2.VideoCapture(0)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">#定义编码方式以及创建VideoWriter的对象</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">fourcc &#x3D; cv2.VideoWriter_fourcc(*&#39;XVID&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">out &#x3D; cv2.VideoWriter(&#39;output.avi&#39;, fourcc, 20.0, (640, 480))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">while(cap.isOpened()):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">ret, frame &#x3D; cap.read()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">if ret &#x3D;&#x3D; True：</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">frame &#x3D; cv2.flip(frame, 0)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">out.write(frame)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">cv2.imshow(&#39;frame&#39;, frame)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">if cv2.waitKey(1) &amp; 0xFF &#x3D;&#x3D; ord(&#39;q&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">break</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">else:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">break</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">cap.release()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">out.release()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">cv2.destroyAllWindows()</span></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OpenCV-Python/" rel="tag"># OpenCV-Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/21/OpenCV-Python-First/" rel="prev" title="OpenCV-Python（一）：从处理图片开始">
+      <i class="fa fa-chevron-left"></i> OpenCV-Python（一）：从处理图片开始
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/03/22/OpenCV-Python-third/" rel="next" title="OpenCV-Python（三）：OpenCV中画画函数">
+      OpenCV-Python（三）：OpenCV中画画函数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从视频开始"><span class="nav-number">1.</span> <span class="nav-text">从视频开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目标"><span class="nav-number">1.0.1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从摄像头获取视频文件"><span class="nav-number">1.0.2.</span> <span class="nav-text">从摄像头获取视频文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过视频文件播放视频"><span class="nav-number">1.0.3.</span> <span class="nav-text">通过视频文件播放视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存视频"><span class="nav-number">1.0.4.</span> <span class="nav-text">保存视频</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">sworker</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sworker</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

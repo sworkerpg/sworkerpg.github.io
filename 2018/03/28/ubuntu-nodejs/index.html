@@ -45,17 +45,18 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="nodejs的安装简单说明nodejs作为轻量级的服务器，现在的使用也是非常常见的。但是在ubuntu下进行安装的时候，如果使用自带的“sudo apt-get install nodejs”和“sudo apt-get install nodejs-legacy”的话出现的问题就是不是最新版本的，而hexo需要的版本是要在4以上的，所以要采取以下安装方式。">
+<meta name="keywords" content="ubuntu,nodejs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="在ubuntu下安装nodejs">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;03&#x2F;28&#x2F;ubuntu-nodejs&#x2F;index.html">
 <meta property="og:site_name" content="sworker">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="nodejs的安装简单说明nodejs作为轻量级的服务器，现在的使用也是非常常见的。但是在ubuntu下进行安装的时候，如果使用自带的“sudo apt-get install nodejs”和“sudo apt-get install nodejs-legacy”的话出现的问题就是不是最新版本的，而hexo需要的版本是要在4以上的，所以要采取以下安装方式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-06T15:36:33.845Z">
+<meta property="og:updated_time" content="2019-12-06T15:36:33.846Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/06/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2018/03/28/ubuntu-nodejs/">
 
 
 <script id="page-configurations">
@@ -69,7 +70,7 @@
   };
 </script>
 
-  <title>Hello World | sworker</title>
+  <title>在ubuntu下安装nodejs | sworker</title>
   
 
 
@@ -168,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/ubuntu-nodejs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -181,7 +182,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          在ubuntu下安装nodejs
         </h1>
 
         <div class="post-meta">
@@ -191,7 +192,25 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-06 23:36:33" itemprop="dateCreated datePublished" datetime="2019-12-06T23:36:33+08:00">2019-12-06</time>
+              <time title="创建时间：2018-03-28 10:30:00" itemprop="dateCreated datePublished" datetime="2018-03-28T10:30:00+08:00">2018-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-06 23:36:33" itemprop="dateModified" datetime="2019-12-06T23:36:33+08:00">2019-12-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%B4%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">技术整理</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -205,19 +224,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure>
+        <h1 id="nodejs的安装"><a href="#nodejs的安装" class="headerlink" title="nodejs的安装"></a>nodejs的安装</h1><h2 id="简单说明"><a href="#简单说明" class="headerlink" title="简单说明"></a>简单说明</h2><p>nodejs作为轻量级的服务器，现在的使用也是非常常见的。但是在ubuntu下进行安装的时候，如果使用自带的“sudo apt-get install nodejs”和“sudo apt-get install nodejs-legacy”的话出现的问题就是不是最新版本的，而hexo需要的版本是要在4以上的，所以要采取以下安装方式。</p>
+<a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="通过curl方法安装"><a href="#通过curl方法安装" class="headerlink" title="通过curl方法安装"></a>通过curl方法安装</h3><h4 id="安装8-x版本"><a href="#安装8-x版本" class="headerlink" title="安装8.x版本"></a>安装8.x版本</h4><blockquote>
+<p>curl -sL <a href="https://deb.nodesource.com/setup_8.x" target="_blank" rel="noopener">https://deb.nodesource.com/setup_8.x</a> | sudo -E bash -<br>sudo apt-get install -y nodejs</p>
+</blockquote>
+<h4 id="安装9-x版本"><a href="#安装9-x版本" class="headerlink" title="安装9.x版本"></a>安装9.x版本</h4><blockquote>
+<p>curl -sL <a href="https://deb.nodesource.com/setup_9.x" target="_blank" rel="noopener">https://deb.nodesource.com/setup_9.x</a> | sudo -E bash -<br>sudo apt-get install -y nodejs</p>
+</blockquote>
+<h3 id="通过压缩文件进行安装"><a href="#通过压缩文件进行安装" class="headerlink" title="通过压缩文件进行安装"></a>通过压缩文件进行安装</h3><h4 id="下载nodejs压缩文件"><a href="#下载nodejs压缩文件" class="headerlink" title="下载nodejs压缩文件"></a>下载nodejs压缩文件</h4><blockquote>
+<p>wget <a href="https://nodejs.org/dist/v9.1.0/node-v9.1.0-linux-x64.tar.xz" target="_blank" rel="noopener">https://nodejs.org/dist/v9.1.0/node-v9.1.0-linux-x64.tar.xz</a></p>
+</blockquote>
+<h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><blockquote>
+<p>tar -xvf node-v9.1.0-linux-x64.tar.xz</p>
+</blockquote>
+<h4 id="将node和npm设置为全局模式"><a href="#将node和npm设置为全局模式" class="headerlink" title="将node和npm设置为全局模式"></a>将node和npm设置为全局模式</h4><blockquote>
+<p>sudo ln /home/ubuntu/node-v9.1.0-linux-x64/bin/node /usr/local/bin/node<br>sudo ln /home/ubuntu/node-v9.1.0-linux-x64/bin/npm /usr/local/bin/npm</p>
+</blockquote>
 
     </div>
 
@@ -226,6 +250,10 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+              <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          </div>
 
         
 
@@ -233,10 +261,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/08/15/Qt-QCustomPlot/" rel="prev" title="QCustomPlot画图基础">
-      <i class="fa fa-chevron-left"></i> QCustomPlot画图基础
+    <a href="/2018/03/24/OpenCV-Python-forth/" rel="prev" title="OpenCV-Python（四）：通过滑块修改颜色">
+      <i class="fa fa-chevron-left"></i> OpenCV-Python（四）：通过滑块修改颜色
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2018/03/28/ubuntu-nginx/" rel="next" title="在ubuntu下nginx的安装与卸载">
+      在ubuntu下nginx的安装与卸载 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -274,7 +305,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs的安装"><span class="nav-number">1.</span> <span class="nav-text">nodejs的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单说明"><span class="nav-number">1.1.</span> <span class="nav-text">简单说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过curl方法安装"><span class="nav-number">1.1.1.</span> <span class="nav-text">通过curl方法安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装8-x版本"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">安装8.x版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装9-x版本"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">安装9.x版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过压缩文件进行安装"><span class="nav-number">1.1.2.</span> <span class="nav-text">通过压缩文件进行安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载nodejs压缩文件"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">下载nodejs压缩文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">解压</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将node和npm设置为全局模式"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">将node和npm设置为全局模式</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
